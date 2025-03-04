@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <!-- Informatica proprietary -->
 <!DOCTYPE POWERMART SYSTEM "powrmart.dtd">
-<POWERMART CREATION_DATE="03/03/2025 17:46:17" REPOSITORY_VERSION="189.98">
+<POWERMART CREATION_DATE="03/04/2025 09:23:51" REPOSITORY_VERSION="189.98">
 <REPOSITORY NAME="REP" VERSION="189" CODEPAGE="MS1252" DATABASETYPE="Oracle">
-<FOLDER NAME="retail" GROUP="" OWNER="Administrator" SHARED="NOTSHARED" DESCRIPTION="" PERMISSIONS="rwx---r--" UUID="09b9d0be-f225-4032-8ffd-a54d0a1cc7f3">
+<FOLDER NAME="retail" GROUP="" OWNER="Administrator" SHARED="NOTSHARED" DESCRIPTION="" PERMISSIONS="rwx---r--" UUID="22744623-a57c-4730-b09c-286cff432b89">
     <CONFIG DESCRIPTION ="Default session configuration object" ISDEFAULT ="YES" NAME ="default_session_config" VERSIONNUMBER ="1">
         <ATTRIBUTE NAME ="Advanced" VALUE =""/>
         <ATTRIBUTE NAME ="Constraint based load ordering" VALUE ="NO"/>
@@ -51,9 +51,6 @@
         </SCHEDULER>
         <TASK DESCRIPTION ="" NAME ="Start" REUSABLE ="NO" TYPE ="Start" VERSIONNUMBER ="1"/>
         <SESSION DESCRIPTION ="" ISVALID ="YES" MAPPINGNAME ="m_cust_valid_ph_no_8" NAME ="s_m_cust_valid_ph_no_8" REUSABLE ="NO" SORTORDER ="Binary" VERSIONNUMBER ="1">
-            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="FILTRANS1" STAGE ="1" TRANSFORMATIONNAME ="FILTRANS1" TRANSFORMATIONTYPE ="Target Definition">
-                <FLATFILE CODEPAGE ="MS1252" CONSECDELIMITERSASONE ="NO" DELIMITED ="YES" DELIMITERS ="," ESCAPE_CHARACTER ="" KEEPESCAPECHAR ="NO" LINESEQUENTIAL ="NO" MULTIDELIMITERSASAND ="NO" NULLCHARTYPE ="ASCII" NULL_CHARACTER ="*" PADBYTES ="1" QUOTE_CHARACTER ="NONE" REPEATABLE ="NO" ROWDELIMITER ="0" SKIPROWS ="0" STRIPTRAILINGBLANKS ="NO"/>
-            </SESSTRANSFORMATIONINST>
             <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="0" SINSTANCENAME ="Retail_Source_DATA_1" STAGE ="0" TRANSFORMATIONNAME ="Retail_Source_DATA_1" TRANSFORMATIONTYPE ="Source Definition">
                 <FLATFILE CODEPAGE ="MS1252" CONSECDELIMITERSASONE ="NO" DELIMITED ="YES" DELIMITERS ="," ESCAPE_CHARACTER ="" KEEPESCAPECHAR ="NO" LINESEQUENTIAL ="NO" MULTIDELIMITERSASAND ="NO" NULLCHARTYPE ="ASCII" NULL_CHARACTER ="*" PADBYTES ="1" QUOTE_CHARACTER ="NONE" REPEATABLE ="NO" ROWDELIMITER ="0" SKIPROWS ="1" STRIPTRAILINGBLANKS ="NO"/>
             </SESSTRANSFORMATIONINST>
@@ -62,7 +59,23 @@
                 <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
             </SESSTRANSFORMATIONINST>
             <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="0" SINSTANCENAME ="SEQTRANS" STAGE ="0" TRANSFORMATIONNAME ="SEQTRANS" TRANSFORMATIONTYPE ="Sequence"/>
+            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="FILTRANS1" STAGE ="4" TRANSFORMATIONNAME ="FILTRANS1" TRANSFORMATIONTYPE ="Target Definition">
+                <FLATFILE CODEPAGE ="MS1252" CONSECDELIMITERSASONE ="NO" DELIMITED ="YES" DELIMITERS ="," ESCAPE_CHARACTER ="" KEEPESCAPECHAR ="NO" LINESEQUENTIAL ="NO" MULTIDELIMITERSASAND ="NO" NULLCHARTYPE ="ASCII" NULL_CHARACTER ="*" PADBYTES ="1" QUOTE_CHARACTER ="NONE" REPEATABLE ="NO" ROWDELIMITER ="0" SKIPROWS ="0" STRIPTRAILINGBLANKS ="NO"/>
+            </SESSTRANSFORMATIONINST>
             <CONFIGREFERENCE REFOBJECTNAME ="default_session_config" TYPE ="Session config"/>
+            <SESSIONEXTENSION DSQINSTNAME ="SQ_Retail_Source_DATA_1" DSQINSTTYPE ="Source Qualifier" NAME ="File Reader" SINSTANCENAME ="Retail_Source_DATA_1" SUBTYPE ="File Reader" TRANSFORMATIONTYPE ="Source Definition" TYPE ="READER">
+                <CONNECTIONREFERENCE CNXREFNAME ="Connection" CONNECTIONNAME ="" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="" CONNECTIONTYPE ="" VARIABLE =""/>
+                <ATTRIBUTE NAME ="Input Type" VALUE ="File"/>
+                <ATTRIBUTE NAME ="Concurrent read partitioning" VALUE ="Optimize throughput"/>
+                <ATTRIBUTE NAME ="Command Type" VALUE ="Command Generating Data"/>
+                <ATTRIBUTE NAME ="Source filetype" VALUE ="Direct"/>
+                <ATTRIBUTE NAME ="Source file directory" VALUE ="C:&#x5c;Users&#x5c;Administrator&#x5c;Downloads&#x5c;informatica-main&#x5c;retail"/>
+                <ATTRIBUTE NAME ="Source filename" VALUE ="Retail_Source_DATA_1.csv"/>
+                <ATTRIBUTE NAME ="Command" VALUE =""/>
+                <ATTRIBUTE NAME ="File Reader Truncate String Null" VALUE ="NO"/>
+                <ATTRIBUTE NAME ="Codepage Parameter" VALUE =""/>
+            </SESSIONEXTENSION>
+            <SESSIONEXTENSION NAME ="File Reader" SINSTANCENAME ="SQ_Retail_Source_DATA_1" SUBTYPE ="File Reader" TRANSFORMATIONTYPE ="Source Qualifier" TYPE ="READER"/>
             <SESSIONEXTENSION NAME ="File Writer" SINSTANCENAME ="FILTRANS1" SUBTYPE ="File Writer" TRANSFORMATIONTYPE ="Target Definition" TYPE ="WRITER">
                 <CONNECTIONREFERENCE CNXREFNAME ="Connection" CONNECTIONNAME ="" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="" CONNECTIONTYPE ="" VARIABLE =""/>
                 <ATTRIBUTE NAME ="Merge Type" VALUE ="No Merge"/>
@@ -75,26 +88,13 @@
                 <ATTRIBUTE NAME ="Footer Command" VALUE =""/>
                 <ATTRIBUTE NAME ="Output Type" VALUE ="File"/>
                 <ATTRIBUTE NAME ="Merge Command" VALUE =""/>
-                <ATTRIBUTE NAME ="Output file directory" VALUE ="C:&#x5c;Users&#x5c;Administrator&#x5c;Desktop&#x5c;info&#x5c;retail&#x5c;8"/>
+                <ATTRIBUTE NAME ="Output file directory" VALUE ="C:&#x5c;Users&#x5c;Administrator&#x5c;Downloads&#x5c;informatica-main&#x5c;retail&#x5c;8"/>
                 <ATTRIBUTE NAME ="Output filename" VALUE ="tgt_cust_valid_ph_no.csv"/>
                 <ATTRIBUTE NAME ="Reject file directory" VALUE ="$PMBadFileDir&#x5c;"/>
                 <ATTRIBUTE NAME ="Reject filename" VALUE ="filtrans11.bad"/>
                 <ATTRIBUTE NAME ="Command" VALUE =""/>
                 <ATTRIBUTE NAME ="Codepage Parameter" VALUE =""/>
             </SESSIONEXTENSION>
-            <SESSIONEXTENSION DSQINSTNAME ="SQ_Retail_Source_DATA_1" DSQINSTTYPE ="Source Qualifier" NAME ="File Reader" SINSTANCENAME ="Retail_Source_DATA_1" SUBTYPE ="File Reader" TRANSFORMATIONTYPE ="Source Definition" TYPE ="READER">
-                <CONNECTIONREFERENCE CNXREFNAME ="Connection" CONNECTIONNAME ="" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="" CONNECTIONTYPE ="" VARIABLE =""/>
-                <ATTRIBUTE NAME ="Input Type" VALUE ="File"/>
-                <ATTRIBUTE NAME ="Concurrent read partitioning" VALUE ="Optimize throughput"/>
-                <ATTRIBUTE NAME ="Command Type" VALUE ="Command Generating Data"/>
-                <ATTRIBUTE NAME ="Source filetype" VALUE ="Direct"/>
-                <ATTRIBUTE NAME ="Source file directory" VALUE ="C:&#x5c;Users&#x5c;Administrator&#x5c;Desktop&#x5c;info&#x5c;retail"/>
-                <ATTRIBUTE NAME ="Source filename" VALUE ="Retail_Source_DATA_1.csv"/>
-                <ATTRIBUTE NAME ="Command" VALUE =""/>
-                <ATTRIBUTE NAME ="File Reader Truncate String Null" VALUE ="NO"/>
-                <ATTRIBUTE NAME ="Codepage Parameter" VALUE =""/>
-            </SESSIONEXTENSION>
-            <SESSIONEXTENSION NAME ="File Reader" SINSTANCENAME ="SQ_Retail_Source_DATA_1" SUBTYPE ="File Reader" TRANSFORMATIONTYPE ="Source Qualifier" TYPE ="READER"/>
             <ATTRIBUTE NAME ="General Options" VALUE =""/>
             <ATTRIBUTE NAME ="Write Backward Compatible Session Log File" VALUE ="NO"/>
             <ATTRIBUTE NAME ="Session Log File Name" VALUE ="s_m_cust_valid_ph_no_8.log"/>
