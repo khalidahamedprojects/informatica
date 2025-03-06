@@ -1,0 +1,7 @@
+Australia	154746.809
+Canada	524758.827
+France	554112.554
+Mexico	516896.906
+Russia	541812.497
+United Kingdom	591520.570
+United States	511572.692
