@@ -31,7 +31,7 @@ Student_ID	Student_Name	Dept_Code
 30	Meena	D4
 31	Divya	D2
 32	Vivek	D8
-33	Kiran	D2
+33	Kiran	D12
 34	Ramesh	D7
 35	Rahul	D11
 36	Banu	D23
